@@ -1,0 +1,23 @@
+{
+  "name": "My MEGA Streamer",
+  "version": "1.0",
+  "updated": "2024-01-15",
+  "videos": [
+    {
+      "id": "1",
+      "name": "Avengers Endgame",
+      "category": "Movies",
+      "url": "https://mega.nz/embed/ABC123XyZ#abcdefg",
+      "thumbnail": "🎬",
+      "description": "Superhero movie"
+    },
+    {
+      "id": "2", 
+      "name": "World Cup Final",
+      "category": "Sports",
+      "url": "https://mega.nz/embed/DEF456KlM#opqrstu",
+      "thumbnail": "⚽",
+      "description": "2022 World Cup final match"
+    }
+  ]
+}
