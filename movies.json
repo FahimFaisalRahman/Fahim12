@@ -1,0 +1,202 @@
+{
+  "site_name": "MEGA Multi-Account Streamer",
+  "site_subtitle": "JSON-Powered Multi-Account System",
+  "accounts": [
+    {
+      "id": 1,
+      "name": "Movies Account",
+      "email": "youremail+mega1@gmail.com",
+      "quota_gb": 5,
+      "used_gb": 0,
+      "category": "movies",
+      "color": "#3498db",
+      "icon": "fas fa-film",
+      "status": "active"
+    },
+    {
+      "id": 2,
+      "name": "TV Series Account",
+      "email": "youremail+mega2@gmail.com",
+      "quota_gb": 5,
+      "used_gb": 0,
+      "category": "series",
+      "color": "#9b59b6",
+      "icon": "fas fa-tv",
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "name": "Backup Account",
+      "email": "youremail+mega3@gmail.com",
+      "quota_gb": 5,
+      "used_gb": 0,
+      "category": "backup",
+      "color": "#2ecc71",
+      "icon": "fas fa-save",
+      "status": "active"
+    },
+    {
+      "id": 4,
+      "name": "Anime Account",
+      "email": "youremail+mega4@gmail.com",
+      "quota_gb": 5,
+      "used_gb": 0,
+      "category": "anime",
+      "color": "#e74c3c",
+      "icon": "fas fa-ghost",
+      "status": "active"
+    }
+  ],
+  "content": [
+    {
+      "id": 1,
+      "title": "The Matrix (1999)",
+      "description": "A computer hacker learns about the true nature of his reality and his role in the war against its controllers.",
+      "duration": "2:16:00",
+      "quality": "720p",
+      "genre": "Sci-Fi, Action",
+      "year": 1999,
+      "type": "movie",
+      "account_id": 1,
+      "size_gb": 2.2,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/HOoUhICC#uqqBBlkblA1U_9SgLnsOiBdauGwSuSEA7-dresoy1zM' allowfullscreen></iframe>",
+      "thumbnail_color": "#00d2ff"
+    },
+    {
+      "id": 2,
+      "title": "Inception (2010)",
+      "description": "A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+      "duration": "2:28:00",
+      "quality": "1080p",
+      "genre": "Action, Sci-Fi, Thriller",
+      "year": 2010,
+      "type": "movie",
+      "account_id": 1,
+      "size_gb": 2.5,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/ANOTHER_CODE_1' allowfullscreen></iframe>",
+      "thumbnail_color": "#ff7e5f"
+    },
+    {
+      "id": 3,
+      "title": "Breaking Bad S01E01 - Pilot",
+      "description": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+      "duration": "58:00",
+      "quality": "720p",
+      "genre": "Crime, Drama, Thriller",
+      "year": 2008,
+      "type": "series",
+      "account_id": 2,
+      "size_gb": 0.7,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/ANOTHER_CODE_2' allowfullscreen></iframe>",
+      "season": 1,
+      "episode": 1,
+      "thumbnail_color": "#8a2387"
+    },
+    {
+      "id": 4,
+      "title": "Game of Thrones S01E01 - Winter is Coming",
+      "description": "Eddard Stark is torn between his family and an old friend when asked to serve at the side of King Robert Baratheon.",
+      "duration": "62:00",
+      "quality": "1080p",
+      "genre": "Action, Adventure, Drama",
+      "year": 2011,
+      "type": "series",
+      "account_id": 2,
+      "size_gb": 0.8,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/ANOTHER_CODE_3' allowfullscreen></iframe>",
+      "season": 1,
+      "episode": 1,
+      "thumbnail_color": "#f27121"
+    },
+    {
+      "id": 5,
+      "title": "Interstellar (2014)",
+      "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+      "duration": "2:49:00",
+      "quality": "4K",
+      "genre": "Adventure, Drama, Sci-Fi",
+      "year": 2014,
+      "type": "movie",
+      "account_id": 3,
+      "size_gb": 4.2,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/ANOTHER_CODE_4' allowfullscreen></iframe>",
+      "thumbnail_color": "#654ea3"
+    },
+    {
+      "id": 6,
+      "title": "Attack on Titan S01E01",
+      "description": "After his hometown is destroyed and his mother is killed, young Eren Jaeger vows to cleanse the earth of the giant humanoid Titans.",
+      "duration": "24:00",
+      "quality": "720p",
+      "genre": "Animation, Action, Adventure",
+      "year": 2013,
+      "type": "anime",
+      "account_id": 4,
+      "size_gb": 0.3,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/ANOTHER_CODE_5' allowfullscreen></iframe>",
+      "season": 1,
+      "episode": 1,
+      "thumbnail_color": "#e43a15"
+    },
+    {
+      "id": 7,
+      "title": "The Dark Knight (2008)",
+      "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests.",
+      "duration": "2:32:00",
+      "quality": "1080p",
+      "genre": "Action, Crime, Drama",
+      "year": 2008,
+      "type": "movie",
+      "account_id": 1,
+      "size_gb": 2.8,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/ANOTHER_CODE_6' allowfullscreen></iframe>",
+      "thumbnail_color": "#283048"
+    },
+    {
+      "id": 8,
+      "title": "Stranger Things S01E01",
+      "description": "After the mysterious disappearance of a young boy, a small town uncovers a mystery involving secret experiments.",
+      "duration": "52:00",
+      "quality": "1080p",
+      "genre": "Drama, Fantasy, Horror",
+      "year": 2016,
+      "type": "series",
+      "account_id": 2,
+      "size_gb": 0.9,
+      "embed_code": "<iframe width='100%' height='100%' frameborder='0' src='https://mega.nz/embed/ANOTHER_CODE_7' allowfullscreen></iframe>",
+      "season": 1,
+      "episode": 1,
+      "thumbnail_color": "#085078"
+    }
+  ],
+  "settings": {
+    "auto_switch_accounts": true,
+    "notify_on_quota": true,
+    "reset_daily": true,
+    "default_quality": "720p",
+    "daily_reset_time": "00:00",
+    "quota_warning_threshold": 80
+  },
+  "categories": {
+    "movies": {
+      "name": "Movies",
+      "color": "#3498db",
+      "icon": "fas fa-film"
+    },
+    "series": {
+      "name": "TV Series",
+      "color": "#9b59b6",
+      "icon": "fas fa-tv"
+    },
+    "anime": {
+      "name": "Anime",
+      "color": "#e74c3c",
+      "icon": "fas fa-ghost"
+    },
+    "backup": {
+      "name": "Backup",
+      "color": "#2ecc71",
+      "icon": "fas fa-save"
+    }
+  }
+}
