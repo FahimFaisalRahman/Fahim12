@@ -1,6 +1,0 @@
-{
-  "jellyfin_server": "http://192.168.0.109:8096",
-  "api_key": "c42dda266b744bc39b808818d2ded00b",
-  "stream_token": "JELLYFIN_SECRET_TOKEN_",
-  "categories": ["Movies", "TV Shows", "Bangla Movies"]
-}
