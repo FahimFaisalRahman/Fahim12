@@ -1,0 +1,33 @@
+#EXTM3U
+# Generated from Jellyfin Server
+# Date: 2025-12-18 02:43:54
+# Items: 9
+# Format: Simple M3U with direct URLs
+
+#EXTINF:2939 group-title="Movies",dexter.resurrection.s01e05 (2025)
+http://192.168.0.109:8096/Videos/371e081e339bb38921d67500fea5aab5/stream?static=true&MediaSourceId=371e081e339bb38921d67500fea5aab5&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac,mp3&AudioStreamIndex=1&allowVideoStreamCopy=true&allowAudioStreamCopy=true
+
+#EXTINF:3609 tvg-logo="http://192.168.0.109:8096/Items/09e7579056d0b02c0558bd2bf57a10e0/Images/Primary" group-title="TV Shows",Unknown S01E01 The Boys S01E01
+http://192.168.0.109:8096/Videos/09e7579056d0b02c0558bd2bf57a10e0/master.m3u8?MediaSourceId=09e7579056d0b02c0558bd2bf57a10e0&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
+#EXTINF:3546 tvg-logo="http://192.168.0.109:8096/Items/eaa72173d6cffb59e5aba243a145ab52/Images/Primary" group-title="TV Shows",Unknown S01E02 The Boys S01E02
+http://192.168.0.109:8096/Videos/eaa72173d6cffb59e5aba243a145ab52/master.m3u8?MediaSourceId=eaa72173d6cffb59e5aba243a145ab52&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
+#EXTINF:3298 tvg-logo="http://192.168.0.109:8096/Items/0df383d8f4ce426f022c5f86aa899132/Images/Primary" group-title="TV Shows",Unknown S01E03 The Boys S01E03
+http://192.168.0.109:8096/Videos/0df383d8f4ce426f022c5f86aa899132/master.m3u8?MediaSourceId=0df383d8f4ce426f022c5f86aa899132&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
+#EXTINF:3393 tvg-logo="http://192.168.0.109:8096/Items/858672e3ecc16c6a104bdf3e08a54f6b/Images/Primary" group-title="TV Shows",Unknown S01E04 The Boys S01E04
+http://192.168.0.109:8096/Videos/858672e3ecc16c6a104bdf3e08a54f6b/master.m3u8?MediaSourceId=858672e3ecc16c6a104bdf3e08a54f6b&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
+#EXTINF:3615 tvg-logo="http://192.168.0.109:8096/Items/9b7e7ac8ba79410d7ff79f3668508772/Images/Primary" group-title="TV Shows",Unknown S01E05 The Boys S01E05
+http://192.168.0.109:8096/Videos/9b7e7ac8ba79410d7ff79f3668508772/master.m3u8?MediaSourceId=9b7e7ac8ba79410d7ff79f3668508772&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
+#EXTINF:3614 tvg-logo="http://192.168.0.109:8096/Items/3ecc52363db0479f28a82187e69c72d5/Images/Primary" group-title="TV Shows",Unknown S01E06 The Boys S01E06
+http://192.168.0.109:8096/Videos/3ecc52363db0479f28a82187e69c72d5/master.m3u8?MediaSourceId=3ecc52363db0479f28a82187e69c72d5&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
+#EXTINF:3384 tvg-logo="http://192.168.0.109:8096/Items/e2590f54263c3d07172c6d59f6ed3884/Images/Primary" group-title="TV Shows",Unknown S01E07 The Boys S01E07
+http://192.168.0.109:8096/Videos/e2590f54263c3d07172c6d59f6ed3884/master.m3u8?MediaSourceId=e2590f54263c3d07172c6d59f6ed3884&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
+#EXTINF:3999 tvg-logo="http://192.168.0.109:8096/Items/f8d8f97a13eee1f125950808470dd8ef/Images/Primary" group-title="TV Shows",Unknown S01E08 The Boys S01E08
+http://192.168.0.109:8096/Videos/f8d8f97a13eee1f125950808470dd8ef/master.m3u8?MediaSourceId=f8d8f97a13eee1f125950808470dd8ef&api_key=c42dda266b744bc39b808818d2ded00b&VideoCodec=h264&AudioCodec=aac
+
