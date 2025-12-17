@@ -1,0 +1,23 @@
+#EXTM3U
+# Generated from Jellyfin Server
+# Generated on: 2025-12-18 02:24:21
+# Total items: 9
+
+#EXTINF:-1 tvg-id="09e7579056d0b02c0558bd2bf57a10e0" tvg-name="Unknown - S01E01 - The Boys S01E01 (2019)" tvg-logo="http://192.168.0.109:8096/Items/09e7579056d0b02c0558bd2bf57a10e0/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E01 - The Boys S01E01 (2019)
+PROXY-09e7579056d0b02c0558bd2bf57a10e0
+#EXTINF:-1 tvg-id="eaa72173d6cffb59e5aba243a145ab52" tvg-name="Unknown - S01E02 - The Boys S01E02 (2019)" tvg-logo="http://192.168.0.109:8096/Items/eaa72173d6cffb59e5aba243a145ab52/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E02 - The Boys S01E02 (2019)
+PROXY-eaa72173d6cffb59e5aba243a145ab52
+#EXTINF:-1 tvg-id="0df383d8f4ce426f022c5f86aa899132" tvg-name="Unknown - S01E03 - The Boys S01E03 (2019)" tvg-logo="http://192.168.0.109:8096/Items/0df383d8f4ce426f022c5f86aa899132/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E03 - The Boys S01E03 (2019)
+PROXY-0df383d8f4ce426f022c5f86aa899132
+#EXTINF:-1 tvg-id="858672e3ecc16c6a104bdf3e08a54f6b" tvg-name="Unknown - S01E04 - The Boys S01E04 (2019)" tvg-logo="http://192.168.0.109:8096/Items/858672e3ecc16c6a104bdf3e08a54f6b/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E04 - The Boys S01E04 (2019)
+PROXY-858672e3ecc16c6a104bdf3e08a54f6b
+#EXTINF:-1 tvg-id="9b7e7ac8ba79410d7ff79f3668508772" tvg-name="Unknown - S01E05 - The Boys S01E05 (2019)" tvg-logo="http://192.168.0.109:8096/Items/9b7e7ac8ba79410d7ff79f3668508772/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E05 - The Boys S01E05 (2019)
+PROXY-9b7e7ac8ba79410d7ff79f3668508772
+#EXTINF:-1 tvg-id="3ecc52363db0479f28a82187e69c72d5" tvg-name="Unknown - S01E06 - The Boys S01E06 (2019)" tvg-logo="http://192.168.0.109:8096/Items/3ecc52363db0479f28a82187e69c72d5/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E06 - The Boys S01E06 (2019)
+PROXY-3ecc52363db0479f28a82187e69c72d5
+#EXTINF:-1 tvg-id="e2590f54263c3d07172c6d59f6ed3884" tvg-name="Unknown - S01E07 - The Boys S01E07 (2019)" tvg-logo="http://192.168.0.109:8096/Items/e2590f54263c3d07172c6d59f6ed3884/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E07 - The Boys S01E07 (2019)
+PROXY-e2590f54263c3d07172c6d59f6ed3884
+#EXTINF:-1 tvg-id="f8d8f97a13eee1f125950808470dd8ef" tvg-name="Unknown - S01E08 - The Boys S01E08 (2019)" tvg-logo="http://192.168.0.109:8096/Items/f8d8f97a13eee1f125950808470dd8ef/Images/Primary?api_key=c42dda266b744bc39b808818d2ded00b" group-title="Series: Unknown",Unknown - S01E08 - The Boys S01E08 (2019)
+PROXY-f8d8f97a13eee1f125950808470dd8ef
+#EXTINF:-1 tvg-id="371e081e339bb38921d67500fea5aab5" tvg-name="dexter.resurrection.s01e05 (2025)" group-title="Movies",dexter.resurrection.s01e05 (2025)
+PROXY-371e081e339bb38921d67500fea5aab5
