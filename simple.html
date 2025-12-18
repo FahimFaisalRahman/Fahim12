@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Jellyfin Streaming Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+    <style>
+        /* ========== CSS START ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00a4dc;
+            --secondary: #0d253f;
+            --dark: #101720;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            --purple: #6f42c1;
+            --green: #20c997;
+            --jellyfin: #00a4dc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a1929 0%, #152642 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(13, 37, 63, 0.8);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            color: var(--jellyfin);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--jellyfin), #4dc3ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .stat i {
+            color: var(--jellyfin);
+            font-size: 1.2rem;
+        }
+
+        /* Search Bar */
+        .search-container {
+            margin: 30px auto;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 18px 25px;
+            padding-left: 55px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--jellyfin);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(0, 164, 220, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+
+        /* Dashboard */
+        .dashboard-section, .library-section {
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .dashboard-section h2, .library-section h2 {
+            color: white;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.8rem;
+        }
+
+        .server-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .server-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid var(--jellyfin);
+            transition: all 0.3s ease;
+        }
+
+        .server-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .server-card h3 {
+            color: var(--jellyfin);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .server-status {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--success);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Content Grid */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-btn.active {
+            background: var(--jellyfin);
+            border-color: var(--jellyfin);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            height: 420px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-thumbnail {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(45deg, #1a3c6b, #2a5298);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-thumbnail i {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .content-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            z-index: 2;
+            background: var(--jellyfin);
+        }
+
+        .content-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-title {
+            font-size: 1.1rem;
+            color: white;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+            height: 3em;
+        }
+
+        .content-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--gray);
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .content-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .content-path {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+            font-family: monospace;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .play-btn {
+            padding: 10px;
+            background: transparent;
+            border: 2px solid var(--jellyfin);
+            color: var(--jellyfin);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        .play-btn:hover {
+            background: var(--jellyfin);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Player Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: rgba(13, 37, 63, 0.95);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: white;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .player-container {
+            padding: 20px;
+        }
+
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .player-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            width: 120px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: white;
+            font-weight: 500;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .player-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--jellyfin);
+            color: var(--jellyfin);
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--gray);
+        }
+
+        .loading-spinner {
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 5px solid var(--jellyfin);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            color: #aaa;
+        }
+
+        .footer-section li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .footer-section li:before {
+            content: "•";
+            color: var(--jellyfin);
+            position: absolute;
+            left: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(13, 37, 63, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 1001;
+            animation: slideIn 0.3s ease;
+            backdrop-filter: blur(10px);
+            max-width: 300px;
+            font-size: 0.9rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .toast.info {
+            border-left: 4px solid var(--info);
+        }
+
+        /* Error Message */
+        .error-message {
+            background: rgba(220, 53, 69, 0.2);
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .error-message h4 {
+            color: var(--danger);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        /* URL Input */
+        .url-input-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-family: monospace;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: var(--jellyfin);
+        }
+
+        .url-btn {
+            padding: 10px 20px;
+            background: var(--jellyfin);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .url-btn:hover {
+            background: #0088cc;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .stats-bar {
+                gap: 10px;
+            }
+            
+            .stat {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .content-card {
+                height: 380px;
+            }
+            
+            .content-thumbnail {
+                height: 140px;
+            }
+            
+            .player-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                justify-content: center;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .content-card {
+                height: 360px;
+            }
+        }
+        /* ========== CSS END ========== */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-play-circle"></i>
+            </div>
+            <h1 id="siteTitle">Jellyfin Streaming Portal</h1>
+            <p class="subtitle" id="siteSubtitle">Direct streaming from your Jellyfin server</p>
+            
+            <div class="stats-bar">
+                <div class="stat">
+                    <i class="fas fa-film"></i>
+                    <span id="totalMovies">0</span> Movies
+                </div>
+                <div class="stat">
+                    <i class="fas fa-server"></i>
+                    <span id="serverStatus">Offline</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-sync-alt"></i>
+                    <span id="lastUpdated">Never</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard -->
+        <section class="dashboard-section">
+            <h2><i class="fas fa-cog"></i> Playlist Configuration</h2>
+            
+            <!-- URL Input -->
+            <div class="url-input-container">
+                <h3><i class="fas fa-link"></i> M3U Playlist URL</h3>
+                <p style="margin-bottom: 10px; color: var(--gray); font-size: 0.9rem;">
+                    Enter the URL to your M3U playlist (GitHub raw URL or direct link)
+                </p>
+                <input type="text" 
+                       class="url-input" 
+                       id="m3uUrlInput" 
+                       value="https://raw.githubusercontent.com/FahimFaisalRahman/Fahim12/refs/heads/main/jellyfin_All_Movies_simple.m3u"
+                       placeholder="https://example.com/playlist.m3u">
+                <button class="url-btn" onclick="loadCustomPlaylist()">
+                    <i class="fas fa-download"></i> Load Playlist
+                </button>
+                <button class="url-btn" onclick="loadSamplePlaylist()" style="background: var(--purple); margin-left: 10px;">
+                    <i class="fas fa-magic"></i> Use Sample Playlist
+                </button>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage">
+                <h4><i class="fas fa-exclamation-triangle"></i> Error Loading Playlist</h4>
+                <p id="errorText">Unable to load playlist from the provided URL.</p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <strong>Possible solutions:</strong><br>
+                    1. Check if the URL is correct<br>
+                    2. Make sure the file is publicly accessible<br>
+                    3. Try using the sample playlist<br>
+                    4. Copy-paste M3U content directly
+                </p>
+            </div>
+
+            <!-- Server Info -->
+            <div class="server-info">
+                <div class="server-card">
+                    <h3><i class="fas fa-info-circle"></i> Current Status</h3>
+                    <span class="server-status" id="playlistStatus">Not Loaded</span>
+                    <p id="playlistInfo">No playlist loaded yet. Enter URL above.</p>
+                </div>
+                <div class="server-card">
+                    <h3><i class="fas fa-question-circle"></i> Need Help?</h3>
+                    <p>You can:</p>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Use the sample playlist</li>
+                        <li>Enter a different URL</li>
+                        <li>Check browser console for errors</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movies Library -->
+        <section class="library-section" id="librarySection" style="display: none;">
+            <div class="section-header">
+                <h2><i class="fas fa-video"></i> Movie Library</h2>
+                <div class="filters">
+                    <button class="filter-btn active" onclick="filterMovies('all')">
+                        <i class="fas fa-globe"></i> All
+                    </button>
+                    <button class="filter-btn" onclick="filterMovies('movies')">
+                        <i class="fas fa-film"></i> Movies
+                    </button>
+                    <button class="filter-btn" onclick="filterMovies('series')">
+                        <i class="fas fa-tv"></i> Series
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" 
+                       class="search-box" 
+                       id="searchInput" 
+                       placeholder="Search movies..." 
+                       onkeyup="searchMovies()">
+            </div>
+            
+            <!-- Loading -->
+            <div class="loading" id="loadingMovies">
+                <div class="loading-spinner"></div>
+                <p>Loading movies...</p>
+            </div>
+            
+            <!-- Movies Grid -->
+            <div class="content-grid" id="moviesGrid" style="display: none;">
+                <!-- Movies loaded here -->
+            </div>
+        </section>
+
+        <!-- Video Player Modal -->
+        <div id="playerModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="playerTitle">Now Playing</h2>
+                    <button class="close-btn" onclick="closePlayer()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="player-container">
+                    <div class="video-container">
+                        <video id="videoPlayer" class="video-player" controls>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="player-info">
+                        <div class="info-row">
+                            <div class="info-label">
+                                <i class="fas fa-film"></i> Title:
+                            </div>
+                            <div class="info-value" id="playerMovieName"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">
+                                <i class="fas fa-clock"></i> Duration:
+                            </div>
+                            <div class="info-value" id="playerDuration"></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">
+                                <i class="fas fa-link"></i> Stream URL:
+                            </div>
+                            <div class="info-value" id="playerUrl" style="font-family: monospace; font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-actions">
+                        <button class="action-btn" onclick="playInVLC()">
+                            <i class="fab fa-vlc"></i> Open in VLC
+                        </button>
+                        <button class="action-btn" onclick="copyStreamUrl()">
+                            <i class="fas fa-copy"></i> Copy URL
+                        </button>
+                        <button class="action-btn" onclick="testAudio()">
+                            <i class="fas fa-volume-up"></i> Test Audio
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-info-circle"></i> How It Works</h3>
+                    <p>This portal loads M3U playlists from any public URL and streams videos directly from your Jellyfin server using direct HTTP streaming.</p>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-tips"></i> Quick Tips</h3>
+                    <ul>
+                        <li>Make sure your M3U file is publicly accessible</li>
+                        <li>URLs should be direct streaming links</li>
+                        <li>Use VLC for best compatibility</li>
+                        <li>Check console for loading errors</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-cog"></i> Troubleshooting</h3>
+                    <ul>
+                        <li>If videos don't play, check URL format</li>
+                        <li>Ensure Jellyfin server is accessible</li>
+                        <li>Try different browser or VLC player</li>
+                        <li>Clear browser cache if needed</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Jellyfin Streaming Portal v1.0 | Loads M3U playlists from any URL</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
+    <script>
+        // ========== JAVASCRIPT START ==========
+        
+        // Sample playlist data (as backup)
+        const SAMPLE_PLAYLIST = `#EXTM3U
+# Sample Playlist - The Boys Season 1
+#EXTINF:3609,The Boys S01E01
+http://192.168.0.109:8096/Videos/762d0e0babdd42583b0f8ffd896a69ae/stream.mp4?static=true
+#EXTINF:3546,The Boys S01E02
+http://192.168.0.109:8096/Videos/878199a0f2122662df9d263a1dfc51a4/stream.mp4?static=true
+#EXTINF:3298,The Boys S01E03
+http://192.168.0.109:8096/Videos/30f99b08a309ec2e60b61c30f5d2f96a/stream.mp4?static=true
+#EXTINF:3393,The Boys S01E04
+http://192.168.0.109:8096/Videos/5c47196933b4c4afecc3583e4ba80cbf/stream.mp4?static=true
+#EXTINF:3615,The Boys S01E05
+http://192.168.0.109:8096/Videos/a291ee9d507faf6c12952e8bb332d5ab/stream.mp4?static=true
+#EXTINF:3614,The Boys S01E06
+http://192.168.0.109:8096/Videos/ed25328e0d9643f16aef5fff6efc7e7e/stream.mp4?static=true
+#EXTINF:3384,The Boys S01E07
+http://192.168.0.109:8096/Videos/7b6ae7d8f434a7de26e94cf9e4d84e6e/stream.mp4?static=true
+#EXTINF:3999,The Boys S01E08
+http://192.168.0.109:8096/Videos/16682cb6ed0e7ad430c21913112386d4/stream.mp4?static=true`;
+
+        // Global State
+        let allMovies = [];
+        let filteredMovies = [];
+        let currentMovie = null;
+        let currentFilter = 'all';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Page loaded");
+            // Try to load from URL first
+            setTimeout(() => {
+                loadCustomPlaylist();
+            }, 1000);
+        });
+
+        // Load custom playlist from URL
+        async function loadCustomPlaylist() {
+            const urlInput = document.getElementById('m3uUrlInput');
+            const url = urlInput.value.trim();
+            
+            if (!url) {
+                showError("Please enter a URL");
+                return;
+            }
+            
+            showLoading(true);
+            hideError();
+            showToast('Loading playlist from URL...', 'info');
+            
+            try {
+                console.log("Fetching from URL:", url);
+                
+                // Use CORS proxy to avoid CORS issues
+                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+                const response = await fetch(proxyUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'text/plain',
+                    },
+                    mode: 'cors'
+                });
+                
+                console.log("Response status:", response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const m3uContent = await response.text();
+                console.log("Content received, length:", m3uContent.length);
+                
+                if (!m3uContent || m3uContent.length < 10) {
+                    throw new Error("Empty or invalid playlist content");
+                }
+                
+                parseM3U(m3uContent);
+                showToast('Playlist loaded successfully!', 'success');
+                
+            } catch (error) {
+                console.error("Error loading playlist:", error);
+                showError(`Failed to load playlist: ${error.message}`);
+                showToast('Failed to load playlist', 'error');
+                
+                // Try without proxy as fallback
+                try {
+                    console.log("Trying direct fetch...");
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        const m3uContent = await response.text();
+                        parseM3U(m3uContent);
+                        showToast('Playlist loaded (direct fetch)', 'success');
+                    }
+                } catch (fallbackError) {
+                    console.error("Fallback also failed:", fallbackError);
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Load sample playlist
+        function loadSamplePlaylist() {
+            showLoading(true);
+            hideError();
+            
+            // Update URL input
+            document.getElementById('m3uUrlInput').value = "Sample Playlist";
+            
+            // Use sample playlist
+            parseM3U(SAMPLE_PLAYLIST);
+            showToast('Sample playlist loaded', 'info');
+            showLoading(false);
+        }
+
+        // Parse M3U content
+        function parseM3U(content) {
+            allMovies = [];
+            const lines = content.split('\n');
+            
+            let currentMovie = null;
+            let lineNumber = 0;
+            
+            for (let line of lines) {
+                lineNumber++;
+                line = line.trim();
+                
+                if (line.startsWith('#EXTINF:')) {
+                    // Parse EXTINF line
+                    const match = line.match(/#EXTINF:(-?\d+),(.+)/);
+                    if (match) {
+                        const duration = parseInt(match[1]);
+                        const title = match[2].trim();
+                        const isSeries = /S\d+E\d+/i.test(title);
+                        
+                        currentMovie = {
+                            id: generateId(),
+                            duration: duration,
+                            title: title,
+                            type: isSeries ? 'series' : 'movie',
+                            season: isSeries ? extractSeason(title) : null,
+                            episode: isSeries ? extractEpisode(title) : null,
+                            description: isSeries ? 'TV Series Episode' : 'Movie'
+                        };
+                    }
+                } else if (line && !line.startsWith('#') && currentMovie) {
+                    // This is the URL line
+                    if (line.startsWith('http')) {
+                        currentMovie.url = line;
+                        allMovies.push(currentMovie);
+                        currentMovie = null;
+                    }
+                }
+            }
+            
+            console.log("Parsed movies:", allMovies.length);
+            
+            if (allMovies.length === 0) {
+                showError("No valid movies found in playlist. Check M3U format.");
+                return;
+            }
+            
+            // Update UI
+            updateStats();
+            renderMovies();
+            showLibrarySection();
+            
+            // Save to localStorage
+            try {
+                localStorage.setItem('lastPlaylist', content);
+                localStorage.setItem('lastUpdate', new Date().toISOString());
+            } catch (e) {
+                console.log("LocalStorage not available");
+            }
+        }
+
+        // Show library section
+        function showLibrarySection() {
+            document.getElementById('librarySection').style.display = 'block';
+        }
+
+        // Render movies
+        function renderMovies() {
+            const moviesGrid = document.getElementById('moviesGrid');
+            const loading = document.getElementById('loadingMovies');
+            
+            // Hide loading, show grid
+            loading.style.display = 'none';
+            
+            if (allMovies.length === 0) {
+                moviesGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-video-slash" style="font-size: 2.5rem; margin-bottom: 15px;"></i>
+                        <h3>No movies found</h3>
+                        <p>The playlist is empty or couldn't be parsed.</p>
+                    </div>
+                `;
+                moviesGrid.style.display = 'grid';
+                return;
+            }
+            
+            // Apply current filter
+            filteredMovies = filterMoviesByType(allMovies, currentFilter);
+            
+            // Clear grid
+            moviesGrid.innerHTML = '';
+            
+            // Add movies
+            filteredMovies.forEach(movie => {
+                const duration = formatDuration(movie.duration);
+                const isSeries = movie.type === 'series';
+                const badgeText = isSeries ? `S${movie.season || '1'}E${movie.episode || '1'}` : duration;
+                
+                const movieCard = document.createElement('div');
+                movieCard.className = 'content-card';
+                movieCard.onclick = () => playMovie(movie);
+                movieCard.innerHTML = `
+                    <div class="content-thumbnail" style="background: ${isSeries ? 'linear-gradient(45deg, #6f42c1, #9b59b6)' : 'linear-gradient(45deg, #1a3c6b, #2a5298)'}">
+                        <i class="${isSeries ? 'fas fa-tv' : 'fas fa-film'}"></i>
+                        <div class="content-badge">${badgeText}</div>
+                    </div>
+                    
+                    <div class="content-info">
+                        <h3 class="content-title">${movie.title}</h3>
+                        
+                        <div class="content-meta">
+                            <span><i class="fas fa-clock"></i> ${duration}</span>
+                            <span><i class="${isSeries ? 'fas fa-tv' : 'fas fa-film'}"></i> ${isSeries ? 'Series' : 'Movie'}</span>
+                        </div>
+                        
+                        <div class="content-path" title="${movie.url}">
+                            <i class="fas fa-link"></i> ${truncateUrl(movie.url, 30)}
+                        </div>
+                        
+                        <button class="play-btn" onclick="event.stopPropagation(); playMovie(${JSON.stringify(movie).replace(/"/g, '&quot;')})">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
+                `;
+                
+                moviesGrid.appendChild(movieCard);
+            });
+            
+            // Show grid
+            moviesGrid.style.display = 'grid';
+        }
+
+        // Filter movies
+        function filterMovies(type) {
+            currentFilter = type;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            renderMovies();
+        }
+
+        // Filter movies by type
+        function filterMoviesByType(movies, type) {
+            switch(type) {
+                case 'movies':
+                    return movies.filter(m => m.type === 'movie');
+                case 'series':
+                    return movies.filter(m => m.type === 'series');
+                default:
+                    return movies;
+            }
+        }
+
+        // Search movies
+        function searchMovies() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = allMovies.filter(movie => 
+                movie.title.toLowerCase().includes(searchTerm)
+            );
+            
+            // Update display
+            const moviesGrid = document.getElementById('moviesGrid');
+            const movieCards = moviesGrid.querySelectorAll('.content-card');
+            
+            movieCards.forEach(card => {
+                const title = card.querySelector('.content-title').textContent.toLowerCase();
+                card.style.display = title.includes(searchTerm) ? 'block' : 'none';
+            });
+        }
+
+        // Play movie
+        function playMovie(movie) {
+            if (typeof movie === 'string') {
+                movie = JSON.parse(movie.replace(/&quot;/g, '"'));
+            }
+            
+            currentMovie = movie;
+            
+            // Show player
+            showPlayer(movie);
+        }
+
+        // Show player
+        function showPlayer(movie) {
+            document.getElementById('playerTitle').textContent = movie.title;
+            document.getElementById('playerMovieName').textContent = movie.title;
+            document.getElementById('playerDuration').textContent = formatDuration(movie.duration);
+            document.getElementById('playerUrl').textContent = movie.url;
+            
+            // Set video source
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = movie.url;
+            videoPlayer.load();
+            
+            // Show modal
+            document.getElementById('playerModal').style.display = 'flex';
+            
+            // Try to play
+            setTimeout(() => {
+                videoPlayer.play().catch(e => {
+                    console.log("Auto-play prevented, user needs to click play");
+                });
+            }, 500);
+        }
+
+        // Close player
+        function closePlayer() {
+            document.getElementById('playerModal').style.display = 'none';
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            videoPlayer.src = '';
+        }
+
+        // Play in VLC
+        function playInVLC() {
+            if (!currentMovie) return;
+            
+            const vlcUrl = `vlc://${currentMovie.url}`;
+            window.open(vlcUrl, '_blank');
+            showToast('Opening in VLC...', 'info');
+        }
+
+        // Copy stream URL
+        function copyStreamUrl() {
+            if (!currentMovie) return;
+            
+            navigator.clipboard.writeText(currentMovie.url)
+                .then(() => showToast('URL copied to clipboard!', 'success'))
+                .catch(() => showToast('Failed to copy URL', 'error'));
+        }
+
+        // Test audio
+        function testAudio() {
+            if (!currentMovie) return;
+            
+            const videoPlayer = document.getElementById('videoPlayer');
+            const hasAudio = videoPlayer.mozHasAudio || 
+                           videoPlayer.webkitAudioDecodedByteCount > 0 || 
+                           videoPlayer.audioTracks?.length > 0;
+            
+            showToast(
+                hasAudio ? 'Audio detected ✓' : 'No audio detected ✗',
+                hasAudio ? 'success' : 'error'
+            );
+        }
+
+        // Update statistics
+        function updateStats() {
+            document.getElementById('totalMovies').textContent = allMovies.length;
+            document.getElementById('serverStatus').textContent = 'Online';
+            document.getElementById('playlistStatus').textContent = 'Loaded';
+            document.getElementById('playlistStatus').style.background = 'var(--success)';
+            document.getElementById('playlistInfo').innerHTML = `
+                <i class="fas fa-film"></i> ${allMovies.length} movies loaded<br>
+                <i class="fas fa-clock"></i> ${new Date().toLocaleTimeString()}
+            `;
+            
+            // Update last updated
+            const lastUpdate = localStorage.getItem('lastUpdate');
+            if (lastUpdate) {
+                const timeAgo = timeSince(new Date(lastUpdate));
+                document.getElementById('lastUpdated').textContent = timeAgo;
+            }
+        }
+
+        // Show loading
+        function showLoading(show) {
+            const loading = document.getElementById('loadingMovies');
+            loading.style.display = show ? 'block' : 'none';
+        }
+
+        // Show error
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            
+            errorText.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        // Hide error
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Show toast
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                  type === 'error' ? 'exclamation-circle' : 
+                                  'info-circle'}"></i>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()" 
+                        style="background: none; border: none; color: white; cursor: pointer; margin-left: auto;">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 5000);
+        }
+
+        // Helper functions
+        function generateId() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+
+        function formatDuration(seconds) {
+            if (seconds < 0) return 'Unknown';
+            
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes}m`;
+            } else {
+                return `${minutes}m`;
+            }
+        }
+
+        function extractSeason(title) {
+            const match = title.match(/S(\d+)/i);
+            return match ? parseInt(match[1]) : 1;
+        }
+
+        function extractEpisode(title) {
+            const match = title.match(/E(\d+)/i);
+            return match ? parseInt(match[1]) : 1;
+        }
+
+        function truncateUrl(url, maxLength = 30) {
+            if (url.length <= maxLength) return url;
+            return url.substring(0, maxLength - 3) + '...';
+        }
+
+        function timeSince(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            
+            let interval = seconds / 3600;
+            if (interval > 1) return Math.floor(interval) + " hours ago";
+            
+            interval = seconds / 60;
+            if (interval > 1) return Math.floor(interval) + " minutes ago";
+            
+            return "Just now";
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Escape to close modal
+            if (e.key === 'Escape') {
+                closePlayer();
+            }
+            
+            // Space to play/pause (only when player is open)
+            if (e.key === ' ' && document.getElementById('playerModal').style.display === 'flex') {
+                e.preventDefault();
+                const videoPlayer = document.getElementById('videoPlayer');
+                if (videoPlayer.paused) {
+                    videoPlayer.play();
+                } else {
+                    videoPlayer.pause();
+                }
+            }
+        });
+
+        // ========== JAVASCRIPT END ==========
+    </script>
+</body>
+</html>
