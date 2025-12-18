@@ -1,0 +1,23 @@
+#EXTM3U
+# Jellyfin Playlist - All Movies
+# Generated from: http://192.168.0.109:8096
+# Total movies: 9
+
+#EXTINF:3609,The Boys S01E01
+file:///D:/Shows/The Boys S01E01.mp4
+#EXTINF:3546,The Boys S01E02
+file:///D:/Shows/The Boys S01E02.mp4
+#EXTINF:3298,The Boys S01E03
+file:///D:/Shows/The Boys S01E03.mp4
+#EXTINF:3393,The Boys S01E04
+file:///D:/Shows/The Boys S01E04.mp4
+#EXTINF:3615,The Boys S01E05
+file:///D:/Shows/The Boys S01E05.mp4
+#EXTINF:3614,The Boys S01E06
+file:///D:/Shows/The Boys S01E06.mp4
+#EXTINF:3384,The Boys S01E07
+file:///D:/Shows/The Boys S01E07.mp4
+#EXTINF:3999,The Boys S01E08
+file:///D:/Shows/The Boys S01E08.mp4
+#EXTINF:2939,dexter.resurrection.s01e05
+file:///D:/Movies/dexter.resurrection.s01e05.1080p.web.h264-successfulcrab[EZTVx.to].mp4
