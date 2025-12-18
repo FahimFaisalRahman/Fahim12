@@ -1,7 +1,0 @@
-#EXTM3U
-# Generated from Jellyfin Server: http://192.168.0.109:8096
-# Playlist Type: Movie,Seriess
-# Authentication: Token-based (secure)
-
-#EXTINF:2939,dexter.resurrection.s01e05
-http://192.168.0.109:8096/Videos/371e081e339bb38921d67500fea5aab5/stream.mp4
