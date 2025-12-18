@@ -1,5 +1,0 @@
-#EXTM3U
-# Jellyfin Playlist - HTTP Streams
-
-#EXTINF:2939,dexter.resurrection.s01e05
-http://192.168.0.109:8096/Videos/371e081e339bb38921d67500fea5aab5/stream.mp4?static=true
