@@ -1,0 +1,25 @@
+#EXTM3U
+# Jellyfin Playlist - All Movies
+# Generated from: http://192.168.0.109:8096
+# Total movies: 9
+# URL Format: http://192.168.0.109:8096/Videos/ID/stream.mp4?static=true
+# Note: May work without authentication in VLC
+
+#EXTINF:3609,The Boys S01E01
+http://192.168.0.109:8096/Videos/762d0e0babdd42583b0f8ffd896a69ae/stream.mp4?static=true
+#EXTINF:3546,The Boys S01E02
+http://192.168.0.109:8096/Videos/878199a0f2122662df9d263a1dfc51a4/stream.mp4?static=true
+#EXTINF:3298,The Boys S01E03
+http://192.168.0.109:8096/Videos/30f99b08a309ec2e60b61c30f5d2f96a/stream.mp4?static=true
+#EXTINF:3393,The Boys S01E04
+http://192.168.0.109:8096/Videos/5c47196933b4c4afecc3583e4ba80cbf/stream.mp4?static=true
+#EXTINF:3615,The Boys S01E05
+http://192.168.0.109:8096/Videos/a291ee9d507faf6c12952e8bb332d5ab/stream.mp4?static=true
+#EXTINF:3614,The Boys S01E06
+http://192.168.0.109:8096/Videos/ed25328e0d9643f16aef5fff6efc7e7e/stream.mp4?static=true
+#EXTINF:3384,The Boys S01E07
+http://192.168.0.109:8096/Videos/7b6ae7d8f434a7de26e94cf9e4d84e6e/stream.mp4?static=true
+#EXTINF:3999,The Boys S01E08
+http://192.168.0.109:8096/Videos/16682cb6ed0e7ad430c21913112386d4/stream.mp4?static=true
+#EXTINF:2939,dexter.resurrection.s01e05
+http://192.168.0.109:8096/Videos/371e081e339bb38921d67500fea5aab5/stream.mp4?static=true
